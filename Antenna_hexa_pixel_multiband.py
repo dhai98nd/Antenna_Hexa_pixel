@@ -62,18 +62,18 @@ class Anten:
         self.Pair_array(left_half)
 
     def run_antenna(self):
-        self.mycst = cst.interface.DesignEnvironment(mode=cst.interface.DesignEnvironment.StartMode.New)
+        self.mycst = cst.interface.DesignEnvironment(mode=cst.interface.DesignEnvironment.StartMode.ExistingOrNew)
         self.myproject = self.mycst.new_mws()
         anten_init=Anten_init.Anten_init(self.myproject)
         anten_init.run()
         size_antenna_x=len(self.PopX)
         size_antenna_y=len(self.PopX[1])
         
-        pixel_size=2
+        pixel_size=1
         Pop_value_1=[]
         par_change=""
         self.par_add=''
-        self.PopX[size_antenna_x//2][size_antenna_y//2-2]=1
+        self.PopX[size_antenna_x//2][size_antenna_y//2-4]=1
         # par_change=self.Anten_Pixel(size_antenna_x//2,size_antenna_y//2,size_antenna_x,size_antenna_y,pixel_size)
         for i in range(len(self.PopX)):
             for j in range(len(self.PopX[i])):

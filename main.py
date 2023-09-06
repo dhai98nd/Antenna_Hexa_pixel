@@ -25,8 +25,8 @@ max_iter = 10 # number of generations
 
 #---------Boundary-------
 
-pixel_max_x = 7
-pixel_max_y = 16
+pixel_max_x = 14
+pixel_max_y = 32
 
 ibh = IBH_multiband.ImprovedBlackHole(num_stars, pixel_max_x, pixel_max_y, max_iter)
 best_value = ibh.run()

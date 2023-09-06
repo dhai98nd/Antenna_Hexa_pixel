@@ -123,9 +123,9 @@ class Anten_init:
     #Dim sDefine As String (can farfile moi phai khai bao)
     def CstDimsDefineg(self,cst_project):
         par_change_mesh ='Dim sDefineAt As String\n'\
-                            'sDefineAt = \"2;2.45;6\"\n'\
+                            'sDefineAt = \"2.55;3.75;6.6\"\n'\
                             'Dim sDefineAtName As String\n'\
-                            'sDefineAtName = \"2;2.45;6\"\n'\
+                            'sDefineAtName = \"2.55;3.75;6.6\"\n'\
                             'Dim sDefineAtToken As String\n'\
                             'sDefineAtToken = \"f=\"\n'\
                             'Dim aFreq() As String\n'\
@@ -322,8 +322,8 @@ class Anten_init:
                             '\t.Yrange "-lengthsub/2", "lengthsub/2"\n'\
                             '\t.Zrange "-hsub", "0"\n'\
                             '\t.Create\n'\
-                            'End With'
-
+                            'End With\n'\
+                            'Solid.Insert"component1:Substrate","Coax:InnerConductor"'
         cst_project.modeler.add_to_history("define brick: component1:Substrate", par_change_mesh, timeout=None)        
     #define brick Ground
     def CstGround(self,cst_project):
@@ -336,7 +336,9 @@ class Anten_init:
                             '\t.Yrange "-lengthsub/2", "lengthsub/2"\n'\
                             '\t.Zrange "-hsub", "-hsub-meta_thick"\n'\
                             '\t.Create\n'\
-                            'End With'
+                            'End With\n'\
+                            'Solid.Insert"component1:Ground","Coax:Dielectric"\n'\
+                            'Solid.Insert"component1:Ground","Coax:InnerConductor"'                            
 
         cst_project.modeler.add_to_history("define brick: component1:Ground", par_change_mesh, timeout=None)
     #define brick Coax
@@ -429,11 +431,12 @@ class Anten_init:
         self.CstDrawBox(self.myproject)
         self.CstMeshInitiator(self.myproject)
         self.CstFD_TETsetting(self.myproject)
-        # CstDimsDefineg(myproject)
+        # self.CstDimsDefineg(self.myproject)
         self.CstSolverType(self.myproject)
         self.CstMaterialeFR4(self.myproject)
         self.CstMaterialeCopper(self.myproject)
         self.CstParameterList(self.myproject,widthsub,lengthsub)
-        self.CstSubstrate(self.myproject)
         self.CstCoax(self.myproject)
         self.CstPort(self.myproject)
+        self.CstGround(self.myproject)
+        self.CstSubstrate(self.myproject)
